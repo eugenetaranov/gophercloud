@@ -1,9 +1,9 @@
 package users
 
 import (
-	"github.com/gophercloud/gophercloud"
-	db "github.com/gophercloud/gophercloud/openstack/db/v1/databases"
-	"github.com/gophercloud/gophercloud/pagination"
+	"github.com/eugenetaranov/gophercloud"
+	db "github.com/eugenetaranov/gophercloud/openstack/db/v1/databases"
+	"github.com/eugenetaranov/gophercloud/pagination"
 )
 
 // CreateOptsBuilder is the top-level interface for creating JSON maps.

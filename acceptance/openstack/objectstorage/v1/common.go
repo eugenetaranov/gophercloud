@@ -6,9 +6,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/openstack"
-	th "github.com/gophercloud/gophercloud/testhelper"
+	"github.com/eugenetaranov/gophercloud"
+	"github.com/eugenetaranov/gophercloud/openstack"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
 )
 
 var metadata = map[string]string{"gopher": "cloud"}

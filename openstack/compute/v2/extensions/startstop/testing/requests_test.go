@@ -3,9 +3,9 @@ package testing
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/startstop"
-	th "github.com/gophercloud/gophercloud/testhelper"
-	"github.com/gophercloud/gophercloud/testhelper/client"
+	"github.com/eugenetaranov/gophercloud/openstack/compute/v2/extensions/startstop"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
+	"github.com/eugenetaranov/gophercloud/testhelper/client"
 )
 
 const serverID = "{serverId}"

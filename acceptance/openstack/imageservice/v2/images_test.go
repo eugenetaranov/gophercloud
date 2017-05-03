@@ -5,8 +5,8 @@ package v2
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud/acceptance/clients"
-	"github.com/gophercloud/gophercloud/acceptance/tools"
+	"github.com/eugenetaranov/gophercloud/acceptance/clients"
+	"github.com/eugenetaranov/gophercloud/acceptance/tools"
 )
 
 func TestImagesCreateDestroyEmptyImage(t *testing.T) {

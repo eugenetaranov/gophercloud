@@ -4,10 +4,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gophercloud/gophercloud/openstack/objectstorage/v1/containers"
-	"github.com/gophercloud/gophercloud/pagination"
-	th "github.com/gophercloud/gophercloud/testhelper"
-	fake "github.com/gophercloud/gophercloud/testhelper/client"
+	"github.com/eugenetaranov/gophercloud/openstack/objectstorage/v1/containers"
+	"github.com/eugenetaranov/gophercloud/pagination"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
+	fake "github.com/eugenetaranov/gophercloud/testhelper/client"
 )
 
 var (

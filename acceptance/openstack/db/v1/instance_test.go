@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gophercloud/gophercloud/acceptance/tools"
-	"github.com/gophercloud/gophercloud/openstack/db/v1/instances"
-	"github.com/gophercloud/gophercloud/pagination"
-	th "github.com/gophercloud/gophercloud/testhelper"
+	"github.com/eugenetaranov/gophercloud/acceptance/tools"
+	"github.com/eugenetaranov/gophercloud/openstack/db/v1/instances"
+	"github.com/eugenetaranov/gophercloud/pagination"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
 )
 
 const envDSType = "DATASTORE_TYPE_ID"

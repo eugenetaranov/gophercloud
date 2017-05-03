@@ -3,10 +3,10 @@ package testing
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud/openstack/common/extensions"
-	"github.com/gophercloud/gophercloud/pagination"
-	th "github.com/gophercloud/gophercloud/testhelper"
-	"github.com/gophercloud/gophercloud/testhelper/client"
+	"github.com/eugenetaranov/gophercloud/openstack/common/extensions"
+	"github.com/eugenetaranov/gophercloud/pagination"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
+	"github.com/eugenetaranov/gophercloud/testhelper/client"
 )
 
 func TestList(t *testing.T) {

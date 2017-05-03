@@ -3,10 +3,10 @@ package testing
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud/openstack/imageservice/v2/images"
-	"github.com/gophercloud/gophercloud/pagination"
-	th "github.com/gophercloud/gophercloud/testhelper"
-	fakeclient "github.com/gophercloud/gophercloud/testhelper/client"
+	"github.com/eugenetaranov/gophercloud/openstack/imageservice/v2/images"
+	"github.com/eugenetaranov/gophercloud/pagination"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
+	fakeclient "github.com/eugenetaranov/gophercloud/testhelper/client"
 )
 
 func TestListImage(t *testing.T) {

@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/acceptance/clients"
-	"github.com/gophercloud/gophercloud/acceptance/tools"
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/quotasets"
-	"github.com/gophercloud/gophercloud/openstack/identity/v2/tenants"
-	th "github.com/gophercloud/gophercloud/testhelper"
+	"github.com/eugenetaranov/gophercloud"
+	"github.com/eugenetaranov/gophercloud/acceptance/clients"
+	"github.com/eugenetaranov/gophercloud/acceptance/tools"
+	"github.com/eugenetaranov/gophercloud/openstack/compute/v2/extensions/quotasets"
+	"github.com/eugenetaranov/gophercloud/openstack/identity/v2/tenants"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
 	"os"
 )
 

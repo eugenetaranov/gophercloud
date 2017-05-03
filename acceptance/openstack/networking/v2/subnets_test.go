@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gophercloud/gophercloud/acceptance/clients"
-	"github.com/gophercloud/gophercloud/acceptance/tools"
-	"github.com/gophercloud/gophercloud/openstack/networking/v2/subnets"
+	"github.com/eugenetaranov/gophercloud/acceptance/clients"
+	"github.com/eugenetaranov/gophercloud/acceptance/tools"
+	"github.com/eugenetaranov/gophercloud/openstack/networking/v2/subnets"
 )
 
 func TestSubnetsList(t *testing.T) {

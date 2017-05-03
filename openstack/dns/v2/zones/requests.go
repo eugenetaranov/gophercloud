@@ -1,8 +1,8 @@
 package zones
 
 import (
-	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/pagination"
+	"github.com/eugenetaranov/gophercloud"
+	"github.com/eugenetaranov/gophercloud/pagination"
 )
 
 type ListOptsBuilder interface {

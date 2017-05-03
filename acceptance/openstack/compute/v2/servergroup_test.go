@@ -5,10 +5,10 @@ package v2
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud/acceptance/clients"
-	"github.com/gophercloud/gophercloud/acceptance/tools"
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/servergroups"
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/servers"
+	"github.com/eugenetaranov/gophercloud/acceptance/clients"
+	"github.com/eugenetaranov/gophercloud/acceptance/tools"
+	"github.com/eugenetaranov/gophercloud/openstack/compute/v2/extensions/servergroups"
+	"github.com/eugenetaranov/gophercloud/openstack/compute/v2/servers"
 )
 
 func TestServergroupsList(t *testing.T) {

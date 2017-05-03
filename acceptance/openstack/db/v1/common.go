@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/openstack"
-	"github.com/gophercloud/gophercloud/openstack/db/v1/instances"
-	th "github.com/gophercloud/gophercloud/testhelper"
+	"github.com/eugenetaranov/gophercloud"
+	"github.com/eugenetaranov/gophercloud/openstack"
+	"github.com/eugenetaranov/gophercloud/openstack/db/v1/instances"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
 )
 
 func newClient(t *testing.T) *gophercloud.ServiceClient {

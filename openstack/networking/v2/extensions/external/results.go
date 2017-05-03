@@ -1,8 +1,8 @@
 package external
 
 import (
-	"github.com/gophercloud/gophercloud/openstack/networking/v2/networks"
-	"github.com/gophercloud/gophercloud/pagination"
+	"github.com/eugenetaranov/gophercloud/openstack/networking/v2/networks"
+	"github.com/eugenetaranov/gophercloud/pagination"
 )
 
 // NetworkExternal represents a decorated form of a Network with based on the

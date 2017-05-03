@@ -1,7 +1,7 @@
 package routerinsertion
 
 import (
-	"github.com/gophercloud/gophercloud/openstack/networking/v2/extensions/fwaas/firewalls"
+	"github.com/eugenetaranov/gophercloud/openstack/networking/v2/extensions/fwaas/firewalls"
 )
 
 // CreateOptsExt adds a RouterIDs option to the base CreateOpts.

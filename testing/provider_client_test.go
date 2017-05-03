@@ -3,8 +3,8 @@ package testing
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud"
-	th "github.com/gophercloud/gophercloud/testhelper"
+	"github.com/eugenetaranov/gophercloud"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
 )
 
 func TestAuthenticatedHeaders(t *testing.T) {

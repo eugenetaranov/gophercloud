@@ -1,6 +1,6 @@
 package roles
 
-import "github.com/gophercloud/gophercloud/pagination"
+import "github.com/eugenetaranov/gophercloud/pagination"
 
 // RoleAssignment is the result of a role assignments query.
 type RoleAssignment struct {

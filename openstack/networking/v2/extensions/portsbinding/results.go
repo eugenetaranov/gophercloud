@@ -1,10 +1,10 @@
 package portsbinding
 
 import (
-	"github.com/gophercloud/gophercloud"
+	"github.com/eugenetaranov/gophercloud"
 
-	"github.com/gophercloud/gophercloud/openstack/networking/v2/ports"
-	"github.com/gophercloud/gophercloud/pagination"
+	"github.com/eugenetaranov/gophercloud/openstack/networking/v2/ports"
+	"github.com/eugenetaranov/gophercloud/pagination"
 )
 
 type commonResult struct {

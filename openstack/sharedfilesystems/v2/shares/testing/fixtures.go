@@ -2,8 +2,8 @@ package testing
 
 import (
 	"fmt"
-	th "github.com/gophercloud/gophercloud/testhelper"
-	fake "github.com/gophercloud/gophercloud/testhelper/client"
+	th "github.com/eugenetaranov/gophercloud/testhelper"
+	fake "github.com/eugenetaranov/gophercloud/testhelper/client"
 	"net/http"
 	"testing"
 )

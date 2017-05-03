@@ -6,12 +6,12 @@ package extensions
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/acceptance/tools"
-	"github.com/gophercloud/gophercloud/openstack/blockstorage/extensions/volumeactions"
-	"github.com/gophercloud/gophercloud/openstack/blockstorage/v2/volumes"
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/images"
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/servers"
+	"github.com/eugenetaranov/gophercloud"
+	"github.com/eugenetaranov/gophercloud/acceptance/tools"
+	"github.com/eugenetaranov/gophercloud/openstack/blockstorage/extensions/volumeactions"
+	"github.com/eugenetaranov/gophercloud/openstack/blockstorage/v2/volumes"
+	"github.com/eugenetaranov/gophercloud/openstack/compute/v2/images"
+	"github.com/eugenetaranov/gophercloud/openstack/compute/v2/servers"
 )
 
 // CreateUploadImage will upload volume it as volume-baked image. An name of new image or err will be

@@ -1,6 +1,6 @@
 package diskconfig
 
-import "github.com/gophercloud/gophercloud/openstack/compute/v2/servers"
+import "github.com/eugenetaranov/gophercloud/openstack/compute/v2/servers"
 
 type ServerWithDiskConfig struct {
 	servers.Server

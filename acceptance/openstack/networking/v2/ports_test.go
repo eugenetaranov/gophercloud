@@ -5,10 +5,10 @@ package v2
 import (
 	"testing"
 
-	"github.com/gophercloud/gophercloud/acceptance/clients"
-	extensions "github.com/gophercloud/gophercloud/acceptance/openstack/networking/v2/extensions"
-	"github.com/gophercloud/gophercloud/acceptance/tools"
-	"github.com/gophercloud/gophercloud/openstack/networking/v2/ports"
+	"github.com/eugenetaranov/gophercloud/acceptance/clients"
+	extensions "github.com/eugenetaranov/gophercloud/acceptance/openstack/networking/v2/extensions"
+	"github.com/eugenetaranov/gophercloud/acceptance/tools"
+	"github.com/eugenetaranov/gophercloud/openstack/networking/v2/ports"
 )
 
 func TestPortsList(t *testing.T) {

@@ -3,7 +3,7 @@ package stacks
 import (
 	"fmt"
 
-	"github.com/gophercloud/gophercloud"
+	"github.com/eugenetaranov/gophercloud"
 )
 
 type ErrInvalidEnvironment struct {

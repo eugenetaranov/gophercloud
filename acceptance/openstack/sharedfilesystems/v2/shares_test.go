@@ -1,8 +1,8 @@
 package v2
 
 import (
-	"github.com/gophercloud/gophercloud/acceptance/clients"
-	"github.com/gophercloud/gophercloud/openstack/sharedfilesystems/v2/shares"
+	"github.com/eugenetaranov/gophercloud/acceptance/clients"
+	"github.com/eugenetaranov/gophercloud/openstack/sharedfilesystems/v2/shares"
 	"testing"
 )
 

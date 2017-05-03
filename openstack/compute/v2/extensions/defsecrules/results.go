@@ -3,9 +3,9 @@ package defsecrules
 import (
 	"encoding/json"
 
-	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/secgroups"
-	"github.com/gophercloud/gophercloud/pagination"
+	"github.com/eugenetaranov/gophercloud"
+	"github.com/eugenetaranov/gophercloud/openstack/compute/v2/extensions/secgroups"
+	"github.com/eugenetaranov/gophercloud/pagination"
 )
 
 // DefaultRule represents a default rule - which is identical to a

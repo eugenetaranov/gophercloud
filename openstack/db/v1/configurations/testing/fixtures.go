@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gophercloud/gophercloud/openstack/db/v1/configurations"
+	"github.com/eugenetaranov/gophercloud/openstack/db/v1/configurations"
 )
 
 var (

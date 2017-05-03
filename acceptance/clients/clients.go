@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/openstack"
+	"github.com/eugenetaranov/gophercloud"
+	"github.com/eugenetaranov/gophercloud/openstack"
 )
 
 // AcceptanceTestChoices contains image and flavor selections for use by the acceptance tests.
