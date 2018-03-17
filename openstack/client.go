@@ -344,6 +344,6 @@ func NewContainerOrchestrationV1(client *gophercloud.ProviderClient, eo gophercl
 	return &gophercloud.ServiceClient{
 		ProviderClient: client,
 		Endpoint:       url,
-		ResourceBase:   url + "v1/",
+		ResourceBase:   url,
 	}, nil
 }
