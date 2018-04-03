@@ -69,8 +69,8 @@ type CreateOpts struct {
 	Nodes             int    `json:"node_count,omitempty"`
 	DiscoveryURL      string `json:"discovery_url,omitempty"`
 	KeyPair           string `json:"keypair" required:"true"`
-	FlavorID          string `json:"flavor_id"`
-	MasterFlavorID    string `json:"master_flavor_id"`
+	FlavorID          string `json:"flavor_id,omitempty"`
+	MasterFlavorID    string `json:"master_flavor_id,omitempty"`
 }
 
 // ClusterCreateMap casts a CreateOpts struct to a map.
