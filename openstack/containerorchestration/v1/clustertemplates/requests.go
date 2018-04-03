@@ -51,23 +51,10 @@ type CreateOpts struct {
 	DNSNameserver       string `json:"dns_nameserver" required:"true"`
 }
 
-// ClusterCreateTemplateMap casts a CreateOpts struct to a map.
+// ToClusterTemplateMap casts a CreateOpts struct to a map.
 func (opts CreateOpts) ToClusterTemplateMap() (map[string]interface{}, error) {
-	// zz, err := gophercloud.BuildRequestBody(opts, "")
-	// fmt.Println("KKK", zz)
-	// fmt.Println("KKK", err)
 	req, err := gophercloud.BuildRequestBody(opts, "")
-	fmt.Println("ZZZ", req)
-	fmt.Println("ZZZ", err)
 	return req, err
-	// return map[string]interface{}{
-	// 	"keypair_id":         opts.KeyPair,
-	// 	"tls_disabled":       opts.TLSDisabled,
-	// 	"public":             opts.Public,
-	// 	"docker_volume_size": opts.DockerVolumeSize,
-	// 	"image_id":           opts.ImageID,
-	// 	"coe":                opts.COE,
-	// }, nil
 }
 
 // Create accepts a CreateOpts struct and creates a new cluster using the values
