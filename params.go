@@ -228,6 +228,8 @@ var t time.Time
 func isZero(v reflect.Value) bool {
 	//fmt.Printf("\n\nchecking isZero for value: %+v\n", v)
 	switch v.Kind() {
+	case reflect.Bool:
+		return false
 	case reflect.Ptr:
 		if v.IsNil() {
 			return true
