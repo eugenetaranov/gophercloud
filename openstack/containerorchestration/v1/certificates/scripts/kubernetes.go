@@ -1,13 +1,15 @@
 package scripts
 
-import "github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/bays"
+import (
+	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/clusters"
+)
 
 type kubernetesWriter struct{}
 
-func (w *kubernetesWriter) Generate(bay *bays.Bay) map[string][]byte {
+func (w *kubernetesWriter) Generate(cluster *clusters.Cluster) map[string][]byte {
 	scripts := make(map[string][]byte)
 
-	data := w.getScriptData(bay)
+	data := w.getScriptData(cluster)
 	scripts["kubectl.config"] = w.buildKubernetesConfig(data)
 	scripts["kubectl.env"] = w.buildBashScript(data)
 	scripts["kubectl.cmd"] = w.buildCmdScript(data)
@@ -16,15 +18,15 @@ func (w *kubernetesWriter) Generate(bay *bays.Bay) map[string][]byte {
 	return scripts
 }
 
-func (w *kubernetesWriter) getScriptData(bay *bays.Bay) interface{} {
+func (w *kubernetesWriter) getScriptData(cluster *clusters.Cluster) interface{} {
 	var data struct {
 		Name          string
 		Server        string
 		DockerVersion string
 	}
-	data.Name = bay.Name
-	data.Server = bay.COEEndpoint
-	data.DockerVersion = bay.ContainerVersion
+	data.Name = cluster.Name
+	data.Server = cluster.COEEndpoint
+	data.DockerVersion = cluster.ContainerVersion
 
 	return data
 }

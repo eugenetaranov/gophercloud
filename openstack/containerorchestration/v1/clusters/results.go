@@ -69,7 +69,7 @@ type Cluster struct {
 	KeyPair string `json:"keypair"`
 
 	// The version of the Docker client compatible with the cluster.
-	// ContainerVersion string `json:"container_version"`
+	ContainerVersion string `json:"container_version"`
 }
 
 // ClusterPage is the page returned by a pager when traversing over a

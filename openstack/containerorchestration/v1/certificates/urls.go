@@ -6,6 +6,6 @@ func createURL(c *gophercloud.ServiceClient) string {
 	return c.ServiceURL("certificates")
 }
 
-func getCertificateAuthorityURL(c *gophercloud.ServiceClient, bayID string) string {
-	return c.ServiceURL("certificates", bayID)
+func getCertificateAuthorityURL(c *gophercloud.ServiceClient, clusterID string) string {
+	return c.ServiceURL("certificates", clusterID)
 }

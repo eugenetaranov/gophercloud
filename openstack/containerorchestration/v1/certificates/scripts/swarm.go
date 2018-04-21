@@ -1,13 +1,15 @@
 package scripts
 
-import "github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/bays"
+import (
+	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/clusters"
+)
 
 type swarmWriter struct{}
 
-func (w *swarmWriter) Generate(bay *bays.Bay) map[string][]byte {
+func (w *swarmWriter) Generate(cluster *clusters.Cluster) map[string][]byte {
 	scripts := make(map[string][]byte)
 
-	data := w.getScriptData(bay)
+	data := w.getScriptData(cluster)
 	scripts["docker.env"] = w.buildBashScript(data)
 	scripts["docker.cmd"] = w.buildCmdScript(data)
 	scripts["docker.ps1"] = w.buildPs1Script(data)
@@ -15,13 +17,13 @@ func (w *swarmWriter) Generate(bay *bays.Bay) map[string][]byte {
 	return scripts
 }
 
-func (w *swarmWriter) getScriptData(bay *bays.Bay) interface{} {
+func (w *swarmWriter) getScriptData(cluster *clusters.Cluster) interface{} {
 	var data struct {
 		DockerHost    string
 		DockerVersion string
 	}
-	data.DockerHost = bay.COEEndpoint
-	data.DockerVersion = bay.ContainerVersion
+	data.DockerHost = cluster.COEEndpoint
+	data.DockerVersion = cluster.ContainerVersion
 
 	return data
 }

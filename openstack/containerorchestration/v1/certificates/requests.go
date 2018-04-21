@@ -10,26 +10,26 @@ import (
 	"errors"
 
 	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/baymodels"
-	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/bays"
 	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/certificates/scripts"
+	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/clusters"
+	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/clustertemplates"
 	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/common"
 )
 
 type createCertificateOpts struct {
-	BayID                     string `json:"bay_uuid"`
+	ClusterID                 string `json:"cluster_uuid"`
 	CertificateSigningRequest string `json:"csr"`
 }
 
-// GetCACertificate retrieves the CA certificate for a bay.
-func GetCACertificate(c *gophercloud.ServiceClient, bayID string) (r CertificateResult) {
+// GetCACertificate retrieves the CA certificate for a cluster.
+func GetCACertificate(c *gophercloud.ServiceClient, clusterID string) (r CertificateResult) {
 	ro := &gophercloud.RequestOpts{ErrorContext: &common.ErrorResponse{}}
-	_, r.Err = c.Get(getCertificateAuthorityURL(c, bayID), &r.Body, ro)
+	_, r.Err = c.Get(getCertificateAuthorityURL(c, clusterID), &r.Body, ro)
 	return
 }
 
-// CreateCertificate associates an existing private key with a bay and returns TLS certificate signed with the bay's CA certificate.
-func CreateCertificate(c *gophercloud.ServiceClient, bayID string, privateKey *rsa.PrivateKey) (r CertificateResult) {
+// CreateCertificate associates an existing private key with a cluster and returns TLS certificate signed with the cluster's CA certificate.
+func CreateCertificate(c *gophercloud.ServiceClient, clusterID string, privateKey *rsa.PrivateKey) (r CertificateResult) {
 	if privateKey == nil || privateKey.D == nil {
 		r.Err = errors.New("CreateCertificate requires privateKey to not be nil or empty")
 		return
@@ -39,7 +39,7 @@ func CreateCertificate(c *gophercloud.ServiceClient, bayID string, privateKey *r
 		return
 	}
 
-	bay, err := bays.Get(c, bayID).Extract()
+	cluster, err := clusters.Get(c, clusterID).Extract()
 	if err != nil {
 		r.Err = err
 		return
@@ -51,7 +51,7 @@ func CreateCertificate(c *gophercloud.ServiceClient, bayID string, privateKey *r
 		return
 	}
 
-	b := createCertificateOpts{BayID: bay.ID, CertificateSigningRequest: csr}
+	b := createCertificateOpts{ClusterID: cluster.ID, CertificateSigningRequest: csr}
 	ro := &gophercloud.RequestOpts{ErrorContext: &common.ErrorResponse{}}
 	_, r.Err = c.Post(createURL(c), b, &r.Body, ro)
 	return
@@ -94,10 +94,10 @@ func generateCertificateSigningRequest(privateKey *rsa.PrivateKey) (string, erro
 	return string(csrPEM), nil
 }
 
-func generateCertificate(c *gophercloud.ServiceClient, bayID string) (*rsa.PrivateKey, *BayCertificate, error) {
+func generateCertificate(c *gophercloud.ServiceClient, clusterID string) (*rsa.PrivateKey, *ClusterCertificate, error) {
 	privateKey, _ := rsa.GenerateKey(rand.Reader, 4096)
 
-	r := CreateCertificate(c, bayID, privateKey)
+	r := CreateCertificate(c, clusterID, privateKey)
 	if r.Err != nil {
 		return nil, nil, r.Err
 	}
@@ -110,23 +110,23 @@ func generateCertificate(c *gophercloud.ServiceClient, bayID string) (*rsa.Priva
 	return privateKey, cert, nil
 }
 
-// CreateCredentialsBundle generates credentials bundle for the specified bay.
-func CreateCredentialsBundle(c *gophercloud.ServiceClient, bayID string) (*CredentialsBundle, error) {
-	bay, err := bays.Get(c, bayID).Extract()
+// CreateCredentialsBundle generates credentials bundle for the specified cluster.
+func CreateCredentialsBundle(c *gophercloud.ServiceClient, clusterID string) (*CredentialsBundle, error) {
+	cluster, err := clusters.Get(c, clusterID).Extract()
 	if err != nil {
 		return nil, err
 	}
-	baymodel, err := baymodels.Get(c, bay.BayModelID).Extract()
-	if err != nil {
-		return nil, err
-	}
-
-	key, cert, err := generateCertificate(c, bay.ID)
+	clustertemplate, err := clustertemplates.Get(c, cluster.ClusterTemplateID).Extract()
 	if err != nil {
 		return nil, err
 	}
 
-	caResult := GetCACertificate(c, bay.ID)
+	key, cert, err := generateCertificate(c, cluster.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	caResult := GetCACertificate(c, cluster.ID)
 	if caResult.Err != nil {
 		return nil, err
 	}
@@ -137,15 +137,15 @@ func CreateCredentialsBundle(c *gophercloud.ServiceClient, bayID string) (*Crede
 	}
 
 	bundle := &CredentialsBundle{
-		BayID:       bay.ID,
+		ClusterID:   cluster.ID,
 		Certificate: cert.Certificate,
 		PrivateKey: pem.Block{
 			Type:  "RSA PRIVATE KEY",
 			Bytes: x509.MarshalPKCS1PrivateKey(key),
 		},
 		CACertificate: ca.Certificate,
-		COEEndpoint:   bay.COEEndpoint,
-		Scripts:       scripts.Generate(baymodel.COE, bay),
+		COEEndpoint:   cluster.COEEndpoint,
+		Scripts:       scripts.Generate(clustertemplate.COE, cluster),
 	}
 
 	return bundle, nil

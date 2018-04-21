@@ -12,9 +12,9 @@ type CertificateResult struct {
 }
 
 // Extract is a function that accepts a CertificateResult and extracts a certificate resource.
-func (r CertificateResult) Extract() (*BayCertificate, error) {
+func (r CertificateResult) Extract() (*ClusterCertificate, error) {
 	var s struct {
-		BayID       string `json:"bay_uuid"`
+		ClusterID   string `json:"cluster_uuid"`
 		Certificate string `json:"pem"`
 	}
 	err := r.ExtractInto(&s)
@@ -23,21 +23,21 @@ func (r CertificateResult) Extract() (*BayCertificate, error) {
 	}
 
 	pemBlock, _ := pem.Decode([]byte(s.Certificate))
-	certificate := &BayCertificate{
-		BayID:       s.BayID,
+	certificate := &ClusterCertificate{
+		ClusterID:   s.ClusterID,
 		Certificate: *pemBlock,
 	}
 	return certificate, nil
 }
 
-// Certificate represents a certificate associated with a bay
-type BayCertificate struct {
-	BayID       string
+// Certificate represents a certificate associated with a cluster
+type ClusterCertificate struct {
+	ClusterID   string
 	Certificate pem.Block
 }
 
 // String returns a PEM encoded string representation of the certificate
-func (c BayCertificate) String() string {
+func (c ClusterCertificate) String() string {
 	return string(pem.EncodeToMemory(&c.Certificate))
 }
 
@@ -46,9 +46,9 @@ type CreateCredentialsBundleResult struct {
 	gophercloud.Result
 }
 
-// CredentialsBundle is a collection of certificates and supporting files necessary to communicate with a bay.
+// CredentialsBundle is a collection of certificates and supporting files necessary to communicate with a cluster.
 type CredentialsBundle struct {
-	BayID         string
+	ClusterID     string
 	COEEndpoint   string
 	Certificate   pem.Block
 	PrivateKey    pem.Block

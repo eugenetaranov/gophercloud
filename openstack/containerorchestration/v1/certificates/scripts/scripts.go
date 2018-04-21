@@ -3,19 +3,19 @@ package scripts
 import (
 	"fmt"
 
-	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/bays"
+	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/clusters"
 )
 
-func Generate(coe string, bay *bays.Bay) map[string][]byte {
+func Generate(coe string, cluster *clusters.Cluster) map[string][]byte {
 	w, err := getScriptWriter(coe)
 	if err != nil {
 		return nil
 	}
-	return w.Generate(bay)
+	return w.Generate(cluster)
 }
 
 type scriptWriter interface {
-	Generate(bay *bays.Bay) map[string][]byte
+	Generate(cluster *clusters.Cluster) map[string][]byte
 }
 
 func getScriptWriter(coe string) (scriptWriter, error) {

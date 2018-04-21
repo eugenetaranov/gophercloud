@@ -23,7 +23,7 @@ func (r commonResult) Extract() (*ClusterTemplate, error) {
 	return s, err
 }
 
-// Represents a template for a Bay
+// Represents a template for a Cluster
 type ClusterTemplate struct {
 	// UUID for the baymodel
 	ID string `json:"uuid"`
