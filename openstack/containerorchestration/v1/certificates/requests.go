@@ -8,6 +8,7 @@ import (
 	"encoding/asn1"
 	"encoding/pem"
 	"errors"
+	"fmt"
 
 	"github.com/gophercloud/gophercloud"
 	"github.com/gophercloud/gophercloud/openstack/containerorchestration/v1/certificates/scripts"
@@ -120,6 +121,7 @@ func CreateCredentialsBundle(c *gophercloud.ServiceClient, clusterID string) (*C
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("KK-KK")
 
 	key, cert, err := generateCertificate(c, cluster.ID)
 	if err != nil {

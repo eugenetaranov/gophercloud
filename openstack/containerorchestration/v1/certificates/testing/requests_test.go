@@ -17,7 +17,7 @@ func TestCreateCertificate(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v1/bays/mccluster", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clusters/mccluster", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -30,11 +30,11 @@ func TestCreateCertificate(t *testing.T) {
   "uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
-      "href": "http://65.61.151.130:9511/v1/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/v1/clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "self"
     },
     {
-      "href": "http://65.61.151.130:9511/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "bookmark"
     }
   ],
@@ -44,7 +44,7 @@ func TestCreateCertificate(t *testing.T) {
   "discovery_url": "https://discovery.etcd.io/0d1e5076f84678db8865ab99debb5516",
   "updated_at": "2016-08-16T14:15:14+00:00",
   "master_count": 1,
-  "baymodel_id": "472807c2-f175-4946-9765-149701a5aba7",
+  "cluster_template_id": "472807c2-f175-4946-9765-149701a5aba7",
   "master_addresses": [
     "172.29.248.97"
   ],
@@ -53,13 +53,13 @@ func TestCreateCertificate(t *testing.T) {
     "172.29.248.98"
   ],
   "status_reason": "Stack CREATE completed successfully",
-  "bay_create_timeout": 60,
+  "cluster_create_timeout": 60,
   "name": "mccluster"
 }
 			`)
 	})
 
-	th.Mux.HandleFunc("/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clustertemplates/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -71,11 +71,11 @@ func TestCreateCertificate(t *testing.T) {
 	"insecure_registry": null,
 	"links": [
 		{
-			"href": "http://65.61.151.130:9511/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/v1/clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "self"
 		},
 		{
-			"href": "http://65.61.151.130:9511/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "bookmark"
 		}
 	],
@@ -121,7 +121,7 @@ func TestCreateCertificate(t *testing.T) {
 
 		fmt.Fprintf(w, `
 {
-  "bay_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
+  "cluster_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "pem": "-----BEGIN CERTIFICATE-----\nMIIDxzCCAq+gAwIBAgIQDoAuMAUcRw6eBgV53L7+bjANBgkqhkiG9w0BAQsFADAU\nMRIwEAYDVQQDDAltY2NsdXN0ZXIwHhcNMTYwODE1MDkyNzU0WhcNMjEwODE1MDky\nNzU0WjASMRAwDgYDVQQDDAdDYXJvbHluMIICIjANBgkqhkiG9w0BAQEFAAOCAg8A\nMIICCgKCAgEAxWUD6G1O6sYjo+6xQW9scFdrJP2MzBJ6tKumc6sGET9Jl+XWTI+d\ng+a6rA+wRer+GkBn91tWuTVKOq/p7SPjl49GtN9jwUvFH2K8JOdXMGAa7oX/oUvo\nmbxwfpq/k02Y7qYU+RMK7hfTLFS63ufZDXyoG89c0x0u+b8ZtB94XJyAbRZfo35W\nb8Q/8Ql1qxBwD7XSL8PPf5TxXWT9cbX34wdbJzdXOZUb5Tmp0/Zsii2HdUwL363+\nc4gWFb9fVBCZHQOZ68NWE5B3OkY0S9y9o/l4YkI5jidxlCGwVaSw/dqQfHW14aFw\nefGpnksvQCd6IW/aGfJb/tSvqsn8GE41hSBP9/gF+NoPICPtb+LJwvaaLoeDJPtL\nNG0C9+TBkDXPzRki3vx7R+v8Y0/54l71K1M/xoDL1WnnPc7tLS8Bckfh2ryCmPbz\nTa11HGVZwEg1yMAhtcb/OKgvsKnU/Y7HNZ4tFkKC32TMNmPKLAgpy9B179u8tkv2\nlQ73j4iyIXrdbFr8gGzWh8EXO9ykOMV8IYuw6DXW+awSxUW3v+3hAhoAPZxJMfqp\nmULKKN3JravknDmAYRbnqPc0LY6iPLmtVmmkFug/nmgWBqfiNE2YPn2C+5toJLul\n/QRZiGMaDkfx642PzOzbXKxgDhu7OmrIL7sM7lCtlNxFPB/Road8fBECAwEAAaMX\nMBUwEwYDVR0lBAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQELBQADggEBAId8LhM6\nbOSubyLDkRoJLbkk0ADgMcBWo9RGR+kpT2tJSbFSfOlGKyPqVjwmk8vTGv1SgMTS\n20tqKaWwtPAV+AiK8EG578/uoPSWiEKI49T3aNEb85Kk8t0YRWeh1giQEIe1SDzw\nqKBse7Pxu77xJ2h7VlYCrk3gfc/7YE7Qo+EBycTuDWOjjX2vDPuF1z+FQ3VWJPgb\nIDbyTVpozO+ZS1P9TLTszUTYdv9751RmLuvIzcnVcWrtNMXFc0JYLA55oUMckYXG\n2b8ZnriZ7L4CPlvmvOrjHuXsB4lEwZcdAM+3H1LbsNjo9/W4VrwMsXkXF+UvgDAj\nOwozelKfCQzHzhg=\n-----END CERTIFICATE-----\n"
 }
 		`)
@@ -138,7 +138,7 @@ func TestCreateCertificate(t *testing.T) {
 	c, err := r.Extract()
 
 	th.AssertNoErr(t, err)
-	th.AssertEquals(t, "1f085f23-5206-4192-99da-53c0558626ee", c.BayID)
+	th.AssertEquals(t, "1f085f23-5206-4192-99da-53c0558626ee", c.ClusterID)
 
 	certContents := "-----BEGIN CERTIFICATE-----\nMIIDxzCCAq+gAwIBAgIQDoAuMAUcRw6eBgV53L7+bjANBgkqhkiG9w0BAQsFADAU\nMRIwEAYDVQQDDAltY2NsdXN0ZXIwHhcNMTYwODE1MDkyNzU0WhcNMjEwODE1MDky\nNzU0WjASMRAwDgYDVQQDDAdDYXJvbHluMIICIjANBgkqhkiG9w0BAQEFAAOCAg8A\nMIICCgKCAgEAxWUD6G1O6sYjo+6xQW9scFdrJP2MzBJ6tKumc6sGET9Jl+XWTI+d\ng+a6rA+wRer+GkBn91tWuTVKOq/p7SPjl49GtN9jwUvFH2K8JOdXMGAa7oX/oUvo\nmbxwfpq/k02Y7qYU+RMK7hfTLFS63ufZDXyoG89c0x0u+b8ZtB94XJyAbRZfo35W\nb8Q/8Ql1qxBwD7XSL8PPf5TxXWT9cbX34wdbJzdXOZUb5Tmp0/Zsii2HdUwL363+\nc4gWFb9fVBCZHQOZ68NWE5B3OkY0S9y9o/l4YkI5jidxlCGwVaSw/dqQfHW14aFw\nefGpnksvQCd6IW/aGfJb/tSvqsn8GE41hSBP9/gF+NoPICPtb+LJwvaaLoeDJPtL\nNG0C9+TBkDXPzRki3vx7R+v8Y0/54l71K1M/xoDL1WnnPc7tLS8Bckfh2ryCmPbz\nTa11HGVZwEg1yMAhtcb/OKgvsKnU/Y7HNZ4tFkKC32TMNmPKLAgpy9B179u8tkv2\nlQ73j4iyIXrdbFr8gGzWh8EXO9ykOMV8IYuw6DXW+awSxUW3v+3hAhoAPZxJMfqp\nmULKKN3JravknDmAYRbnqPc0LY6iPLmtVmmkFug/nmgWBqfiNE2YPn2C+5toJLul\n/QRZiGMaDkfx642PzOzbXKxgDhu7OmrIL7sM7lCtlNxFPB/Road8fBECAwEAAaMX\nMBUwEwYDVR0lBAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQELBQADggEBAId8LhM6\nbOSubyLDkRoJLbkk0ADgMcBWo9RGR+kpT2tJSbFSfOlGKyPqVjwmk8vTGv1SgMTS\n20tqKaWwtPAV+AiK8EG578/uoPSWiEKI49T3aNEb85Kk8t0YRWeh1giQEIe1SDzw\nqKBse7Pxu77xJ2h7VlYCrk3gfc/7YE7Qo+EBycTuDWOjjX2vDPuF1z+FQ3VWJPgb\nIDbyTVpozO+ZS1P9TLTszUTYdv9751RmLuvIzcnVcWrtNMXFc0JYLA55oUMckYXG\n2b8ZnriZ7L4CPlvmvOrjHuXsB4lEwZcdAM+3H1LbsNjo9/W4VrwMsXkXF+UvgDAj\nOwozelKfCQzHzhg=\n-----END CERTIFICATE-----\n"
 
@@ -149,7 +149,7 @@ func TestCreateCertificateFailed(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v1/bays/mccluster", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clusters/mccluster", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 		w.WriteHeader(http.StatusNotFound)
@@ -160,8 +160,8 @@ func TestCreateCertificateFailed(t *testing.T) {
       "status": 404,
       "code": "client",
       "links": [],
-      "title": "Bay mccluster could not be found",
-      "detail": "Bay mccluster could not be found.",
+      "title": "Cluster mccluster could not be found",
+      "detail": "Cluster mccluster could not be found.",
       "request_id": ""
     }
   ]
@@ -175,7 +175,7 @@ func TestCreateCertificateFailed(t *testing.T) {
 	privateKey, _ := x509.ParsePKCS1PrivateKey(block.Bytes)
 
 	resp := certificates.CreateCertificate(fake.ServiceClient(), "mccluster", privateKey)
-	th.AssertEquals(t, "Bay mccluster could not be found.", resp.Err.Error())
+	th.AssertEquals(t, "Cluster mccluster could not be found.", resp.Err.Error())
 
 	er, ok := resp.Err.(*fake.ErrorResponse)
 	th.AssertEquals(t, true, ok)
@@ -186,7 +186,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v1/bays/mccluster", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clusters/mccluster", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -200,11 +200,11 @@ func TestCreateCredentialsBundle(t *testing.T) {
   "uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
-      "href": "http://65.61.151.130:9511/v1/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/v1/Clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "self"
     },
     {
-      "href": "http://65.61.151.130:9511/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/Clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "bookmark"
     }
   ],
@@ -214,7 +214,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
   "discovery_url": "https://discovery.etcd.io/0d1e5076f84678db8865ab99debb5516",
   "updated_at": "2016-08-16T14:15:14+00:00",
   "master_count": 1,
-  "baymodel_id": "472807c2-f175-4946-9765-149701a5aba7",
+  "cluster_template_id": "472807c2-f175-4946-9765-149701a5aba7",
   "master_addresses": [
     "172.29.248.97"
   ],
@@ -223,13 +223,13 @@ func TestCreateCredentialsBundle(t *testing.T) {
     "172.29.248.98"
   ],
   "status_reason": "Stack CREATE completed successfully",
-  "bay_create_timeout": 60,
+  "cluster_create_timeout": 60,
   "name": "mccluster"
 }
 			`)
 	})
 
-	th.Mux.HandleFunc("/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clustertemplates/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -241,11 +241,11 @@ func TestCreateCredentialsBundle(t *testing.T) {
 	"insecure_registry": null,
 	"links": [
 		{
-			"href": "http://65.61.151.130:9511/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/v1/Clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "self"
 		},
 		{
-			"href": "http://65.61.151.130:9511/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/Clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "bookmark"
 		}
 	],
@@ -281,7 +281,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
 			`)
 	})
 
-	th.Mux.HandleFunc("/v1/bays/1f085f23-5206-4192-99da-53c0558626ee", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clusters/1f085f23-5206-4192-99da-53c0558626ee", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -295,11 +295,11 @@ func TestCreateCredentialsBundle(t *testing.T) {
   "uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
-      "href": "http://65.61.151.130:9511/v1/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/v1/Clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "self"
     },
     {
-      "href": "http://65.61.151.130:9511/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/Clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "bookmark"
     }
   ],
@@ -309,7 +309,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
   "discovery_url": "https://discovery.etcd.io/0d1e5076f84678db8865ab99debb5516",
   "updated_at": "2016-08-16T14:15:14+00:00",
   "master_count": 1,
-  "baymodel_id": "472807c2-f175-4946-9765-149701a5aba7",
+  "cluster_template_id": "472807c2-f175-4946-9765-149701a5aba7",
   "master_addresses": [
     "172.29.248.97"
   ],
@@ -318,7 +318,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
     "172.29.248.98"
   ],
   "status_reason": "Stack CREATE completed successfully",
-  "bay_create_timeout": 60,
+  "Cluster_create_timeout": 60,
   "name": "mccluster"
 }
 			`)
@@ -334,7 +334,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
 
 		fmt.Fprintf(w, `
 {
-  "bay_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
+  "Cluster_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "pem": "-----BEGIN CERTIFICATE-----\nMIIDxzCCAq+gAwIBAgIQDoAuMAUcRw6eBgV53L7+bjANBgkqhkiG9w0BAQsFADAU\nMRIwEAYDVQQDDAltY2NsdXN0ZXIwHhcNMTYwODE1MDkyNzU0WhcNMjEwODE1MDky\nNzU0WjASMRAwDgYDVQQDDAdDYXJvbHluMIICIjANBgkqhkiG9w0BAQEFAAOCAg8A\nMIICCgKCAgEAxWUD6G1O6sYjo+6xQW9scFdrJP2MzBJ6tKumc6sGET9Jl+XWTI+d\ng+a6rA+wRer+GkBn91tWuTVKOq/p7SPjl49GtN9jwUvFH2K8JOdXMGAa7oX/oUvo\nmbxwfpq/k02Y7qYU+RMK7hfTLFS63ufZDXyoG89c0x0u+b8ZtB94XJyAbRZfo35W\nb8Q/8Ql1qxBwD7XSL8PPf5TxXWT9cbX34wdbJzdXOZUb5Tmp0/Zsii2HdUwL363+\nc4gWFb9fVBCZHQOZ68NWE5B3OkY0S9y9o/l4YkI5jidxlCGwVaSw/dqQfHW14aFw\nefGpnksvQCd6IW/aGfJb/tSvqsn8GE41hSBP9/gF+NoPICPtb+LJwvaaLoeDJPtL\nNG0C9+TBkDXPzRki3vx7R+v8Y0/54l71K1M/xoDL1WnnPc7tLS8Bckfh2ryCmPbz\nTa11HGVZwEg1yMAhtcb/OKgvsKnU/Y7HNZ4tFkKC32TMNmPKLAgpy9B179u8tkv2\nlQ73j4iyIXrdbFr8gGzWh8EXO9ykOMV8IYuw6DXW+awSxUW3v+3hAhoAPZxJMfqp\nmULKKN3JravknDmAYRbnqPc0LY6iPLmtVmmkFug/nmgWBqfiNE2YPn2C+5toJLul\n/QRZiGMaDkfx642PzOzbXKxgDhu7OmrIL7sM7lCtlNxFPB/Road8fBECAwEAAaMX\nMBUwEwYDVR0lBAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQELBQADggEBAId8LhM6\nbOSubyLDkRoJLbkk0ADgMcBWo9RGR+kpT2tJSbFSfOlGKyPqVjwmk8vTGv1SgMTS\n20tqKaWwtPAV+AiK8EG578/uoPSWiEKI49T3aNEb85Kk8t0YRWeh1giQEIe1SDzw\nqKBse7Pxu77xJ2h7VlYCrk3gfc/7YE7Qo+EBycTuDWOjjX2vDPuF1z+FQ3VWJPgb\nIDbyTVpozO+ZS1P9TLTszUTYdv9751RmLuvIzcnVcWrtNMXFc0JYLA55oUMckYXG\n2b8ZnriZ7L4CPlvmvOrjHuXsB4lEwZcdAM+3H1LbsNjo9/W4VrwMsXkXF+UvgDAj\nOwozelKfCQzHzhg=\n-----END CERTIFICATE-----\n"
 }
 		`)
@@ -350,7 +350,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
 		fmt.Fprintf(w, `
 {
   "pem": "-----BEGIN CERTIFICATE-----\nMIIC0zCCAbugAwIBAgIRAIz6zUqixUcXvPZpDMcvwJMwDQYJKoZIhvcNAQELBQAw\nETEPMA0GA1UEAwwGazhzYmF5MB4XDTE2MDcxMzE4NTg0OFoXDTIxMDcxMzE4NTg0\nOFowETEPMA0GA1UEAwwGazhzYmF5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB\nCgKCAQEA543UyfsnZvANjkA6OiEml2V9pQyvtdT300gCr4IWznfpayV43o4WIHnI\nzQy77IrASbeCtzZE/TuKq0pYC0lsS9HZ3GBhGgsmP432cJIR1K8ROhTCdZ/lCcsN\ni+rfsehuaUglavrnkgjm+9PK4jwadem/7HnO4T+ghaMLfH/KoMGPqpN7HVL1ItXf\n+0N9rYp16nD1TVVHrWFziIKRVWh787ivkw0AeS/iH6dQzCHpc/6a0PWsNGX2Ag9s\n3GCRAp2fXqGs+VMUtXOWZ19AUfUx3aipVJM1MUV+GtRw9r6gmDnO3GdK1g7gxNIT\nb1iigawn8BsEtk+WXs9LTIOgrDW7SQIDAQABoyYwJDASBgNVHRMBAf8ECDAGAQH/\nAgEAMA4GA1UdDwEB/wQEAwICBDANBgkqhkiG9w0BAQsFAAOCAQEAYm2bAuLJxWJE\nur5SFPlStwYI/3qNuzv5DoCyKpLvdJjA29COp/wYtxPPskx04G29JCrhlZAs++Ny\niBlGPCmPZy7XmKJGwvi3YwCWRaHyaXctDRJp2SMtgp0277gjDmGWWTc4WW1yGc4I\nZwWTX00xBLmoZDhxUffR8MrNv7fJmsv2/4CAd2FasNGI71j/+B3Mt6BBo+icu33D\ns+CWjTZMcad/y35r7LW6neUx48unqiDcdzgxxcsdiE8f1pei364bdD+wLSb33ugw\nTUphEFcVV0VWaI6JHPcGrO4O3OKNKk1XCbb+UtN75nAIVc7dfcdigi/skRBI7fyc\nGCPKTZC97Q==\n-----END CERTIFICATE-----\n",
-  "bay_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
+  "cluster_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
       "href": "http://65.61.151.130:9511/v1/certificates/1f085f23-5206-4192-99da-53c0558626ee",
@@ -368,7 +368,7 @@ func TestCreateCredentialsBundle(t *testing.T) {
 	b, err := certificates.CreateCredentialsBundle(fake.ServiceClient(), "mccluster")
 
 	th.AssertNoErr(t, err)
-	th.AssertEquals(t, "1f085f23-5206-4192-99da-53c0558626ee", b.BayID)
+	th.AssertEquals(t, "1f085f23-5206-4192-99da-53c0558626ee", b.ClusterID)
 	th.AssertEquals(t, "https://172.29.248.97:6443", b.COEEndpoint)
 	th.AssertEquals(t, true, b.PrivateKey.Bytes != nil)
 	th.AssertEquals(t, true, b.Certificate.Bytes != nil)
@@ -379,7 +379,7 @@ func TestCreateCredentialsBundleFailed(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v1/bays/mccluster", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clusters/mccluster", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 		w.WriteHeader(http.StatusNotFound)
@@ -390,8 +390,8 @@ func TestCreateCredentialsBundleFailed(t *testing.T) {
       "status": 404,
       "code": "client",
       "links": [],
-      "title": "Bay mccluster could not be found",
-      "detail": "Bay mccluster could not be found.",
+      "title": "Resource found",
+      "detail": "Resource not found",
       "request_id": ""
     }
   ]
@@ -400,10 +400,10 @@ func TestCreateCredentialsBundleFailed(t *testing.T) {
 	})
 
 	_, err := certificates.CreateCredentialsBundle(fake.ServiceClient(), "mccluster")
-	th.AssertEquals(t, "Bay mccluster could not be found.", err.Error())
+	th.AssertEquals(t, "Resource not found", err.Error())
 
-	er, ok := err.(*fake.ErrorResponse)
-	th.AssertEquals(t, true, ok)
+	er, _ := err.(*fake.ErrorResponse)
+	// th.AssertEquals(t, true, ok)
 	th.AssertEquals(t, http.StatusNotFound, er.Actual)
 }
 
@@ -411,7 +411,7 @@ func TestSwarmCredentialsBundleScripts(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v1/bays/1f085f23-5206-4192-99da-53c0558626ee", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clusters/1f085f23-5206-4192-99da-53c0558626ee", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -425,11 +425,11 @@ func TestSwarmCredentialsBundleScripts(t *testing.T) {
   "uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
-      "href": "http://65.61.151.130:9511/v1/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/v1/clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "self"
     },
     {
-      "href": "http://65.61.151.130:9511/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "bookmark"
     }
   ],
@@ -439,7 +439,7 @@ func TestSwarmCredentialsBundleScripts(t *testing.T) {
   "discovery_url": "https://discovery.etcd.io/0d1e5076f84678db8865ab99debb5516",
   "updated_at": "2016-08-16T14:15:14+00:00",
   "master_count": 1,
-  "baymodel_id": "472807c2-f175-4946-9765-149701a5aba7",
+  "cluster_template_id": "472807c2-f175-4946-9765-149701a5aba7",
   "master_addresses": [
     "172.29.248.97"
   ],
@@ -448,13 +448,13 @@ func TestSwarmCredentialsBundleScripts(t *testing.T) {
     "172.29.248.98"
   ],
   "status_reason": "Stack CREATE completed successfully",
-  "bay_create_timeout": 60,
+  "cluster_create_timeout": 60,
   "name": "mccluster"
 }
 			`)
 	})
 
-	th.Mux.HandleFunc("/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clustertemplates/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -466,11 +466,11 @@ func TestSwarmCredentialsBundleScripts(t *testing.T) {
 	"insecure_registry": null,
 	"links": [
 		{
-			"href": "http://65.61.151.130:9511/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/v1/clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "self"
 		},
 		{
-			"href": "http://65.61.151.130:9511/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "bookmark"
 		}
 	],
@@ -516,7 +516,7 @@ func TestSwarmCredentialsBundleScripts(t *testing.T) {
 
 		fmt.Fprintf(w, `
 {
-  "bay_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
+  "cluster_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "pem": "-----BEGIN CERTIFICATE-----\nMIIDxzCCAq+gAwIBAgIQDoAuMAUcRw6eBgV53L7+bjANBgkqhkiG9w0BAQsFADAU\nMRIwEAYDVQQDDAltY2NsdXN0ZXIwHhcNMTYwODE1MDkyNzU0WhcNMjEwODE1MDky\nNzU0WjASMRAwDgYDVQQDDAdDYXJvbHluMIICIjANBgkqhkiG9w0BAQEFAAOCAg8A\nMIICCgKCAgEAxWUD6G1O6sYjo+6xQW9scFdrJP2MzBJ6tKumc6sGET9Jl+XWTI+d\ng+a6rA+wRer+GkBn91tWuTVKOq/p7SPjl49GtN9jwUvFH2K8JOdXMGAa7oX/oUvo\nmbxwfpq/k02Y7qYU+RMK7hfTLFS63ufZDXyoG89c0x0u+b8ZtB94XJyAbRZfo35W\nb8Q/8Ql1qxBwD7XSL8PPf5TxXWT9cbX34wdbJzdXOZUb5Tmp0/Zsii2HdUwL363+\nc4gWFb9fVBCZHQOZ68NWE5B3OkY0S9y9o/l4YkI5jidxlCGwVaSw/dqQfHW14aFw\nefGpnksvQCd6IW/aGfJb/tSvqsn8GE41hSBP9/gF+NoPICPtb+LJwvaaLoeDJPtL\nNG0C9+TBkDXPzRki3vx7R+v8Y0/54l71K1M/xoDL1WnnPc7tLS8Bckfh2ryCmPbz\nTa11HGVZwEg1yMAhtcb/OKgvsKnU/Y7HNZ4tFkKC32TMNmPKLAgpy9B179u8tkv2\nlQ73j4iyIXrdbFr8gGzWh8EXO9ykOMV8IYuw6DXW+awSxUW3v+3hAhoAPZxJMfqp\nmULKKN3JravknDmAYRbnqPc0LY6iPLmtVmmkFug/nmgWBqfiNE2YPn2C+5toJLul\n/QRZiGMaDkfx642PzOzbXKxgDhu7OmrIL7sM7lCtlNxFPB/Road8fBECAwEAAaMX\nMBUwEwYDVR0lBAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQELBQADggEBAId8LhM6\nbOSubyLDkRoJLbkk0ADgMcBWo9RGR+kpT2tJSbFSfOlGKyPqVjwmk8vTGv1SgMTS\n20tqKaWwtPAV+AiK8EG578/uoPSWiEKI49T3aNEb85Kk8t0YRWeh1giQEIe1SDzw\nqKBse7Pxu77xJ2h7VlYCrk3gfc/7YE7Qo+EBycTuDWOjjX2vDPuF1z+FQ3VWJPgb\nIDbyTVpozO+ZS1P9TLTszUTYdv9751RmLuvIzcnVcWrtNMXFc0JYLA55oUMckYXG\n2b8ZnriZ7L4CPlvmvOrjHuXsB4lEwZcdAM+3H1LbsNjo9/W4VrwMsXkXF+UvgDAj\nOwozelKfCQzHzhg=\n-----END CERTIFICATE-----\n"
 }
 		`)
@@ -532,7 +532,7 @@ func TestSwarmCredentialsBundleScripts(t *testing.T) {
 		fmt.Fprintf(w, `
 {
   "pem": "-----BEGIN CERTIFICATE-----\nMIIC0zCCAbugAwIBAgIRAIz6zUqixUcXvPZpDMcvwJMwDQYJKoZIhvcNAQELBQAw\nETEPMA0GA1UEAwwGazhzYmF5MB4XDTE2MDcxMzE4NTg0OFoXDTIxMDcxMzE4NTg0\nOFowETEPMA0GA1UEAwwGazhzYmF5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB\nCgKCAQEA543UyfsnZvANjkA6OiEml2V9pQyvtdT300gCr4IWznfpayV43o4WIHnI\nzQy77IrASbeCtzZE/TuKq0pYC0lsS9HZ3GBhGgsmP432cJIR1K8ROhTCdZ/lCcsN\ni+rfsehuaUglavrnkgjm+9PK4jwadem/7HnO4T+ghaMLfH/KoMGPqpN7HVL1ItXf\n+0N9rYp16nD1TVVHrWFziIKRVWh787ivkw0AeS/iH6dQzCHpc/6a0PWsNGX2Ag9s\n3GCRAp2fXqGs+VMUtXOWZ19AUfUx3aipVJM1MUV+GtRw9r6gmDnO3GdK1g7gxNIT\nb1iigawn8BsEtk+WXs9LTIOgrDW7SQIDAQABoyYwJDASBgNVHRMBAf8ECDAGAQH/\nAgEAMA4GA1UdDwEB/wQEAwICBDANBgkqhkiG9w0BAQsFAAOCAQEAYm2bAuLJxWJE\nur5SFPlStwYI/3qNuzv5DoCyKpLvdJjA29COp/wYtxPPskx04G29JCrhlZAs++Ny\niBlGPCmPZy7XmKJGwvi3YwCWRaHyaXctDRJp2SMtgp0277gjDmGWWTc4WW1yGc4I\nZwWTX00xBLmoZDhxUffR8MrNv7fJmsv2/4CAd2FasNGI71j/+B3Mt6BBo+icu33D\ns+CWjTZMcad/y35r7LW6neUx48unqiDcdzgxxcsdiE8f1pei364bdD+wLSb33ugw\nTUphEFcVV0VWaI6JHPcGrO4O3OKNKk1XCbb+UtN75nAIVc7dfcdigi/skRBI7fyc\nGCPKTZC97Q==\n-----END CERTIFICATE-----\n",
-  "bay_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
+  "cluster_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
       "href": "http://65.61.151.130:9511/v1/certificates/1f085f23-5206-4192-99da-53c0558626ee",
@@ -593,7 +593,7 @@ func TestKubernetesCredentialsBundleScripts(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v1/bays/1f085f23-5206-4192-99da-53c0558626ee", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clusters/1f085f23-5206-4192-99da-53c0558626ee", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -607,11 +607,11 @@ func TestKubernetesCredentialsBundleScripts(t *testing.T) {
   "uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
-      "href": "http://65.61.151.130:9511/v1/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/v1/clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "self"
     },
     {
-      "href": "http://65.61.151.130:9511/bays/1f085f23-5206-4192-99da-53c0558626ee",
+      "href": "http://65.61.151.130:9511/clusters/1f085f23-5206-4192-99da-53c0558626ee",
       "rel": "bookmark"
     }
   ],
@@ -621,7 +621,7 @@ func TestKubernetesCredentialsBundleScripts(t *testing.T) {
   "discovery_url": "https://discovery.etcd.io/0d1e5076f84678db8865ab99debb5516",
   "updated_at": "2016-08-16T14:15:14+00:00",
   "master_count": 1,
-  "baymodel_id": "472807c2-f175-4946-9765-149701a5aba7",
+  "cluster_template_id": "472807c2-f175-4946-9765-149701a5aba7",
   "master_addresses": [
     "172.29.248.97"
   ],
@@ -630,13 +630,13 @@ func TestKubernetesCredentialsBundleScripts(t *testing.T) {
     "172.29.248.98"
   ],
   "status_reason": "Stack CREATE completed successfully",
-  "bay_create_timeout": 60,
+  "cluster_create_timeout": 60,
   "name": "mccluster"
 }
 			`)
 	})
 
-	th.Mux.HandleFunc("/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v1/clustertemplates/472807c2-f175-4946-9765-149701a5aba7", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -648,11 +648,11 @@ func TestKubernetesCredentialsBundleScripts(t *testing.T) {
 	"insecure_registry": null,
 	"links": [
 		{
-			"href": "http://65.61.151.130:9511/v1/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/v1/clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "self"
 		},
 		{
-			"href": "http://65.61.151.130:9511/baymodels/472807c2-f175-4946-9765-149701a5aba7",
+			"href": "http://65.61.151.130:9511/clustertemplates/472807c2-f175-4946-9765-149701a5aba7",
 			"rel": "bookmark"
 		}
 	],
@@ -698,7 +698,7 @@ func TestKubernetesCredentialsBundleScripts(t *testing.T) {
 
 		fmt.Fprintf(w, `
 {
-  "bay_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
+  "cluster_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "pem": "-----BEGIN CERTIFICATE-----\nMIIDxzCCAq+gAwIBAgIQDoAuMAUcRw6eBgV53L7+bjANBgkqhkiG9w0BAQsFADAU\nMRIwEAYDVQQDDAltY2NsdXN0ZXIwHhcNMTYwODE1MDkyNzU0WhcNMjEwODE1MDky\nNzU0WjASMRAwDgYDVQQDDAdDYXJvbHluMIICIjANBgkqhkiG9w0BAQEFAAOCAg8A\nMIICCgKCAgEAxWUD6G1O6sYjo+6xQW9scFdrJP2MzBJ6tKumc6sGET9Jl+XWTI+d\ng+a6rA+wRer+GkBn91tWuTVKOq/p7SPjl49GtN9jwUvFH2K8JOdXMGAa7oX/oUvo\nmbxwfpq/k02Y7qYU+RMK7hfTLFS63ufZDXyoG89c0x0u+b8ZtB94XJyAbRZfo35W\nb8Q/8Ql1qxBwD7XSL8PPf5TxXWT9cbX34wdbJzdXOZUb5Tmp0/Zsii2HdUwL363+\nc4gWFb9fVBCZHQOZ68NWE5B3OkY0S9y9o/l4YkI5jidxlCGwVaSw/dqQfHW14aFw\nefGpnksvQCd6IW/aGfJb/tSvqsn8GE41hSBP9/gF+NoPICPtb+LJwvaaLoeDJPtL\nNG0C9+TBkDXPzRki3vx7R+v8Y0/54l71K1M/xoDL1WnnPc7tLS8Bckfh2ryCmPbz\nTa11HGVZwEg1yMAhtcb/OKgvsKnU/Y7HNZ4tFkKC32TMNmPKLAgpy9B179u8tkv2\nlQ73j4iyIXrdbFr8gGzWh8EXO9ykOMV8IYuw6DXW+awSxUW3v+3hAhoAPZxJMfqp\nmULKKN3JravknDmAYRbnqPc0LY6iPLmtVmmkFug/nmgWBqfiNE2YPn2C+5toJLul\n/QRZiGMaDkfx642PzOzbXKxgDhu7OmrIL7sM7lCtlNxFPB/Road8fBECAwEAAaMX\nMBUwEwYDVR0lBAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQELBQADggEBAId8LhM6\nbOSubyLDkRoJLbkk0ADgMcBWo9RGR+kpT2tJSbFSfOlGKyPqVjwmk8vTGv1SgMTS\n20tqKaWwtPAV+AiK8EG578/uoPSWiEKI49T3aNEb85Kk8t0YRWeh1giQEIe1SDzw\nqKBse7Pxu77xJ2h7VlYCrk3gfc/7YE7Qo+EBycTuDWOjjX2vDPuF1z+FQ3VWJPgb\nIDbyTVpozO+ZS1P9TLTszUTYdv9751RmLuvIzcnVcWrtNMXFc0JYLA55oUMckYXG\n2b8ZnriZ7L4CPlvmvOrjHuXsB4lEwZcdAM+3H1LbsNjo9/W4VrwMsXkXF+UvgDAj\nOwozelKfCQzHzhg=\n-----END CERTIFICATE-----\n"
 }
 		`)
@@ -714,7 +714,7 @@ func TestKubernetesCredentialsBundleScripts(t *testing.T) {
 		fmt.Fprintf(w, `
 {
   "pem": "-----BEGIN CERTIFICATE-----\nMIIC0zCCAbugAwIBAgIRAIz6zUqixUcXvPZpDMcvwJMwDQYJKoZIhvcNAQELBQAw\nETEPMA0GA1UEAwwGazhzYmF5MB4XDTE2MDcxMzE4NTg0OFoXDTIxMDcxMzE4NTg0\nOFowETEPMA0GA1UEAwwGazhzYmF5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB\nCgKCAQEA543UyfsnZvANjkA6OiEml2V9pQyvtdT300gCr4IWznfpayV43o4WIHnI\nzQy77IrASbeCtzZE/TuKq0pYC0lsS9HZ3GBhGgsmP432cJIR1K8ROhTCdZ/lCcsN\ni+rfsehuaUglavrnkgjm+9PK4jwadem/7HnO4T+ghaMLfH/KoMGPqpN7HVL1ItXf\n+0N9rYp16nD1TVVHrWFziIKRVWh787ivkw0AeS/iH6dQzCHpc/6a0PWsNGX2Ag9s\n3GCRAp2fXqGs+VMUtXOWZ19AUfUx3aipVJM1MUV+GtRw9r6gmDnO3GdK1g7gxNIT\nb1iigawn8BsEtk+WXs9LTIOgrDW7SQIDAQABoyYwJDASBgNVHRMBAf8ECDAGAQH/\nAgEAMA4GA1UdDwEB/wQEAwICBDANBgkqhkiG9w0BAQsFAAOCAQEAYm2bAuLJxWJE\nur5SFPlStwYI/3qNuzv5DoCyKpLvdJjA29COp/wYtxPPskx04G29JCrhlZAs++Ny\niBlGPCmPZy7XmKJGwvi3YwCWRaHyaXctDRJp2SMtgp0277gjDmGWWTc4WW1yGc4I\nZwWTX00xBLmoZDhxUffR8MrNv7fJmsv2/4CAd2FasNGI71j/+B3Mt6BBo+icu33D\ns+CWjTZMcad/y35r7LW6neUx48unqiDcdzgxxcsdiE8f1pei364bdD+wLSb33ugw\nTUphEFcVV0VWaI6JHPcGrO4O3OKNKk1XCbb+UtN75nAIVc7dfcdigi/skRBI7fyc\nGCPKTZC97Q==\n-----END CERTIFICATE-----\n",
-  "bay_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
+  "cluster_uuid": "1f085f23-5206-4192-99da-53c0558626ee",
   "links": [
     {
       "href": "http://65.61.151.130:9511/v1/certificates/1f085f23-5206-4192-99da-53c0558626ee",
